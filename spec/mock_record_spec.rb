@@ -40,4 +40,29 @@ describe MockRecord do
     mr.save!
     mr.should_not be_dirty
   end
+  
+  it "remains not dirty when values are read" do
+    mr = MockRecord.new
+    mr.any_attribute_at_all = :a_value
+    mr.save!
+    mr.any_attribute_at_all
+    mr.should_not be_dirty
+  end
+  
+  it "begins not saved" do
+    MockRecord.new.should_not be_saved
+  end
+  
+  it "is saved once it has been saved" do
+    mr = MockRecord.new
+    mr.save!
+    mr.should be_saved
+  end
+  
+  it "is no longer saved when a value is set" do
+    mr = MockRecord.new
+    mr.save!
+    mr.any_attribute_at_all = :a_value
+    mr.should_not be_saved
+  end
 end

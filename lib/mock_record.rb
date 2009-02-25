@@ -8,7 +8,7 @@ class MockRecord
   end
   
   def method_missing(id, *a)
-    @dirty = true
+    @dirty = true if id.to_s =~ /=$/
     @data.send(id, *a)
   end
   
@@ -18,6 +18,10 @@ class MockRecord
   
   def dirty?
     @dirty
+  end
+  
+  def saved?
+    not new_record? and not dirty?
   end
   
   def save!
