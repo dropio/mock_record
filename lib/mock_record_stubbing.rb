@@ -11,6 +11,20 @@ module MockRecordStubbing
       mr
     end
     
+    klass.stub!(:create).and_return do
+      mr = MockRecord.new
+      mr.save!
+      mock_records << mr
+      mr
+    end
+    
+    klass.stub!(:create!).and_return do
+      mr = MockRecord.new
+      mr.save!
+      mock_records << mr
+      mr
+    end
+    
     klass.stub!(:mock_records).and_return(mock_records)
   end
 end
