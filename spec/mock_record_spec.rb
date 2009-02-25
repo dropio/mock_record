@@ -1,4 +1,4 @@
-$: << File.join(File.dirname(__FILE__), '..', 'lib')
+require File.dirname(__FILE__) + '/spec_helper'
 require 'mock_record'
 
 describe MockRecord do
