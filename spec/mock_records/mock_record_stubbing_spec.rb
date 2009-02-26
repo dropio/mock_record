@@ -1,10 +1,9 @@
-require File.dirname(__FILE__) + '/spec_helper'
-require 'mock_record_stubbing'
+require File.dirname(__FILE__) + '/../spec_helper'
 
 class Model; end
 
 describe "When Model is stubbed with MockRecordStubbing#stub_new_records, Model" do
-  include MockRecordStubbing
+  include MockRecords
   
   before do
     stub_new_records Model
