@@ -49,12 +49,23 @@ describe "When Model is stubbed with MockRecordStubbing#stub_new_records, Model"
   end
   
   describe ".new_records" do
-    it "returns all of the mock records created" do
+    it "returns all of the saved mock records" do
       model1 = Model.new
       model2 = Model.create
-      model3 = Model.create!
+      model3 = Model.new
       
-      Model.new_records.should == [model1, model2, model3]
+      model3.save
+      
+      Model.new_records.should == [model2, model3]
+    end
+    
+    it "does not reflect unsaved changes" do
+      model = Model.new
+      model.age = 32
+      model.save
+      model.age = 33
+      
+      Model.new_records.first.age.should == 32
     end
   end
 end
