@@ -22,7 +22,7 @@ module MockRecordStubbing
     end
     
     klass.stub!(:new_records).and_return do
-      mock_records.reject { |mr| mr.new_record? }.each { |mr| mr.reload }
+      mock_records.select { |mr| mr.saved? }.each { |mr| mr.reload }
     end
   end
 end

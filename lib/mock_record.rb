@@ -4,7 +4,7 @@ class MockRecord
   def initialize
     @data       = OpenStruct.new
     @saved_data = OpenStruct.new
-    @new_record = true
+    @saved      = false
     @dirty      = false
   end
   
@@ -13,20 +13,20 @@ class MockRecord
     @data.send(id, *a)
   end
   
+  def saved?
+    @saved
+  end
+  
   def new_record?
-    @new_record
+    not saved?
   end
   
   def dirty?
     @dirty
   end
   
-  def saved?
-    not new_record? and not dirty?
-  end
-  
   def save!
-    @new_record = false
+    @saved      = true
     @dirty      = false
     @saved_data = @data.dup
   end
