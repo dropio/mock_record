@@ -48,13 +48,13 @@ describe "When Model is stubbed with MockRecordStubbing#stub_new_records, Model"
     end
   end
   
-  describe ".mock_records" do
+  describe ".new_records" do
     it "returns all of the mock records created" do
       model1 = Model.new
       model2 = Model.create
       model3 = Model.create!
       
-      Model.mock_records.should == [model1, model2, model3]
+      Model.new_records.should == [model1, model2, model3]
     end
   end
 end

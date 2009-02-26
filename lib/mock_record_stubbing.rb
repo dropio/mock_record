@@ -21,6 +21,6 @@ module MockRecordStubbing
        klass.stub!(method).with(an_instance_of(Hash)).and_return { |attrs| make_new_record[attrs, save] }
     end
     
-    klass.stub!(:mock_records).and_return(mock_records)
+    klass.stub!(:new_records).and_return(mock_records)
   end
 end
