@@ -14,17 +14,37 @@ describe "When Model is stubbed with MockRecordStubbing#stub_new_records, Model"
     it "returns a new mock record" do
       Model.new.should be_a_new_record
     end
+    
+    it "takes a hash of attributes to set" do
+      m = Model.new(:name => "gary", :age => 32)
+      m.name.should == "gary"
+      m.age.should  == 32
+    end
   end
   
   describe ".create" do
     it "returns a saved mock record" do
       Model.create.should be_saved
     end
+    
+    it "takes a hash of attributes to set" do
+      m = Model.create(:name => "gary", :age => 32)
+      m.name.should == "gary"
+      m.age.should  == 32
+      m.should be_saved
+    end
   end
   
   describe ".create!" do
     it "returns a saved mock record" do
       Model.create!.should be_saved
+    end
+    
+    it "takes a hash of attributes to set" do
+      m = Model.create!(:name => "gary", :age => 32)
+      m.name.should == "gary"
+      m.age.should  == 32
+      m.should be_saved
     end
   end
   
