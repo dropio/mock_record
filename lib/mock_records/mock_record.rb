@@ -2,8 +2,17 @@ require 'ostruct'
 
 module MockRecords
   class MockRecord
-    def initialize
-      @data       = OpenStruct.new
+    class << self
+      def create!(attrs={})
+        mr = new(attrs)
+        mr.save!
+        mr
+      end
+      alias_method :create, :create!
+    end
+    
+    def initialize(attrs={})
+      @data       = OpenStruct.new(attrs)
       @saved_data = OpenStruct.new
       @saved      = false
       @dirty      = false
@@ -35,6 +44,7 @@ module MockRecords
   
     def reload
       @data = @saved_data.dup
+      nil
     end
   end
 end

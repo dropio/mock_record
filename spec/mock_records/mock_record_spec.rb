@@ -70,5 +70,21 @@ module MockRecords
         mr.any_attribute_at_all.should == :a_value
       end
     end
+    
+    describe ".new" do
+      it "takes a hash of attributes" do
+        MockRecord.new(:name => "Joe").name.should == "Joe"
+      end
+    end
+    
+    describe ".create!" do
+      it "creates a saved MockRecord" do
+        MockRecord.create!.should be_saved
+      end
+      
+      it "takes a hash of attributes" do
+        MockRecord.create!(:name => "Joe").name.should == "Joe"
+      end
+    end
   end
 end
