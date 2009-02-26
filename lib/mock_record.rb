@@ -3,6 +3,7 @@ require 'ostruct'
 class MockRecord
   def initialize
     @data       = OpenStruct.new
+    @saved_data = OpenStruct.new
     @new_record = true
     @dirty      = false
   end
@@ -27,6 +28,11 @@ class MockRecord
   def save!
     @new_record = false
     @dirty      = false
+    @saved_data = @data.dup
   end
   alias_method :save, :save!
+  
+  def reload
+    @data = @saved_data.dup
+  end
 end

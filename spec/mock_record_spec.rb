@@ -65,4 +65,16 @@ describe MockRecord do
     mr.any_attribute_at_all = :a_value
     mr.should_not be_saved
   end
+  
+  describe "#reload" do
+    it "rolls back unsaved changes" do
+      mr = MockRecord.new
+      mr.any_attribute_at_all = :a_value
+      mr.save!
+      mr.any_attribute_at_all = :another_value
+      mr.reload
+      
+      mr.any_attribute_at_all.should == :a_value
+    end
+  end
 end
